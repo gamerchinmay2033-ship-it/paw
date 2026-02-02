@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Get Well Soon Quiz 💕</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #ffe6f0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .quiz {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      width: 300px;
+      text-align: center;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    button {
+      margin: 8px 0;
+      padding: 10px;
+      width: 100%;
+      border: none;
+      border-radius: 8px;
+      background: #ff66a3;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #ff3385;
+    }
+    #result {
+      margin-top: 15px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+<div class="quiz">
+  <h2>Quick Quiz 💗</h2>
+  <p id="question"></p>
+  <div id="answers"></div>
+  <div id="result"></div>
+</div>
+
+<script>
+  const quiz = [
+    {
+      question: "Who misses you the most right now?",
+      answers: ["Me 😌", "You", "Everyone"],
+      correct: 0
+    },
+    {
+      question: "What’s the best medicine?",
+      answers: ["Sleep", "Soup", "My love 💕"],
+      correct: 2
+    },
+    {
+      question: "What should you do today?",
+      answers: ["Rest", "Text me", "Both"],
+      correct: 2
+    }
+  ];
+
+  let current = 0;
+
+  function loadQuestion() {
+    document.getElementById("result").textContent = "";
+    const q = quiz[current];
+    document.getElementById("question").textContent = q.question;
+
+    const answersDiv = document.getElementById("answers");
+    answersDiv.innerHTML = "";
+
+    q.answers.forEach((answer, index) => {
+      const btn = document.createElement("button");
+      btn.textContent = answer;
+      btn.onclick = () => checkAnswer(index);
+      answersDiv.appendChild(btn);
+    });
+  }
+
+  function checkAnswer(index) {
+    const result = document.getElementById("result");
+    if (index === quiz[current].correct) {
+      result.textContent = "Correct 😍 good job baby";
+    } else {
+      result.textContent = "WRONG 😈 We will talk about this later.";
+    }
+
+    current++;
+    if (current < quiz.length) {
+      setTimeout(loadQuestion, 1200);
+    } else {
+      setTimeout(() => {
+        document.querySelector(".quiz").innerHTML =
+          "<h2>Quiz Done 💖</h2><p>Now go rest and get better 🥺</p>";
+      }, 1200);
+    }
+  }
+
+  loadQuestion();
+</script>
+
+</body>
+</html>
